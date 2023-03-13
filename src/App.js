@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import { TodoForm } from "./components/TodoForm";
 
 const starterTodo = [
     { text: "walk the dog", isCompleted: false },
@@ -11,12 +12,10 @@ const starterTodo = [
 function App() {
     const [todoList, setTodoList] = useState(starterTodo);
 
-    const [todoForm, setTodoForm] = useState("");
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const newTodo = [{ text: todoForm, isCompleted: false }, ...todoList];
-        setTodoList(newTodo);
-        setTodoForm("");
+    // const [todoForm, setTodoForm] = useState("");
+    // make new func addNewTodo
+    const addNewTodo = (newTodo) => {
+        setTodoList([newTodo, ...todoList]);
     };
 
     const handleComplete = (completedIndex) => {
@@ -39,15 +38,7 @@ function App() {
     return (
         <div className="App">
             <h1>Todo List</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="todoName"
-                    value={todoForm}
-                    onChange={(e) => setTodoForm(e.target.value)}
-                />
-                <input type="submit" value="Add" />
-            </form>
+            <TodoForm addNewTodo={addNewTodo} />
             <ul>
                 {todoList.map((todo, index) => (
                     <li key={index}>
