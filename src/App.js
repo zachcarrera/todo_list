@@ -7,7 +7,7 @@ function App() {
         <div className="App container">
             <h1>Todo List</h1>
             <div className="row d-flex justify-content-center">
-                <div className="col-3">
+                <div className="col-4">
                     <TodoList />
                 </div>
             </div>

@@ -19,7 +19,7 @@ export const OneTodo = (props) => {
                 />
                 <label
                     style={styling}
-                    className="form-check-label me-2"
+                    className="form-check-label me-3"
                     htmlFor={`${text}-${index}`}
                 >
                     {text}
