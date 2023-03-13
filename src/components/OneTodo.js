@@ -5,7 +5,9 @@ export const OneTodo = (props) => {
         todo: { text, isCompleted },
         index,
     } = props;
+
     const styling = { textDecoration: isCompleted ? "line-through" : "none" };
+
     return (
         <div>
             <li className="list-group-item d-flex align-items-center justify-content-center">

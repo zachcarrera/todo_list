@@ -3,12 +3,14 @@ import { useState } from "react";
 
 export const TodoForm = (props) => {
     const [todoForm, setTodoForm] = useState("");
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const newTodo = { text: todoForm, isCompleted: false };
         props.addNewTodo(newTodo);
         setTodoForm("");
     };
+
     return (
         <form
             onSubmit={handleSubmit}

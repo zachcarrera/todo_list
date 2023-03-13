@@ -4,8 +4,9 @@ import { OneTodo } from "./OneTodo";
 import { TodoForm } from "./TodoForm";
 
 export const TodoList = (props) => {
+    const storageTodoList = JSON.parse(localStorage.getItem("todoList"));
     const [todoList, setTodoList] = useState(
-        JSON.parse(localStorage.getItem("todoList"))
+        storageTodoList === null ? [] : storageTodoList
     );
 
     useEffect(() => {
@@ -15,6 +16,7 @@ export const TodoList = (props) => {
             setTodoList(storageTodoList);
         }
     }, []);
+
     useEffect(() => {
         localStorage.setItem("todoList", JSON.stringify(todoList));
     }, [todoList]);
@@ -25,11 +27,13 @@ export const TodoList = (props) => {
 
     const handleComplete = (completedIndex) => {
         const newTodo = todoList.map((todo, index) => {
-            const indvidualTodo = { ...todo };
             if (index === completedIndex) {
-                indvidualTodo.isCompleted = !indvidualTodo.isCompleted;
+                return {
+                    ...todo,
+                    isCompleted: !todo.isCompleted,
+                };
             }
-            return indvidualTodo;
+            return todo;
         });
         setTodoList(newTodo);
     };
@@ -40,6 +44,7 @@ export const TodoList = (props) => {
         });
         setTodoList(newTodo);
     };
+
     return (
         <div>
             <TodoForm addNewTodo={addNewTodo} />
