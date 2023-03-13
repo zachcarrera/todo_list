@@ -8,15 +8,26 @@ export const OneTodo = (props) => {
     const styling = { textDecoration: isCompleted ? "line-through" : "none" };
     return (
         <div>
-            <li>
+            <li className="list-group-item d-flex align-items-center justify-content-center">
                 <input
                     type="checkbox"
+                    className="form-check-input me-2"
                     name="completed"
+                    id={`${text}-${index}`}
                     checked={isCompleted}
                     onChange={(e) => props.handleComplete(index)}
                 />
-                <span style={styling}>{text}</span>
-                <button onClick={(e) => props.handleDelete(index)}>
+                <label
+                    style={styling}
+                    className="form-check-label me-2"
+                    htmlFor={`${text}-${index}`}
+                >
+                    {text}
+                </label>
+                <button
+                    onClick={(e) => props.handleDelete(index)}
+                    className="btn btn-outline-danger"
+                >
                     Delete
                 </button>
             </li>

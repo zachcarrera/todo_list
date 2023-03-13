@@ -43,7 +43,7 @@ export const TodoList = (props) => {
     return (
         <div>
             <TodoForm addNewTodo={addNewTodo} />
-            <ul>
+            <ul className="list-group list-group-flush">
                 {todoList.map((todo, index) => (
                     <OneTodo
                         key={index}

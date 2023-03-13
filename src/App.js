@@ -4,9 +4,13 @@ import { TodoList } from "./components/TodoList";
 
 function App() {
     return (
-        <div className="App">
+        <div className="App container">
             <h1>Todo List</h1>
-            <TodoList />
+            <div className="row d-flex justify-content-center">
+                <div className="col-3">
+                    <TodoList />
+                </div>
+            </div>
         </div>
     );
 }

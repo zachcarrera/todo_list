@@ -10,17 +10,25 @@ export const TodoForm = (props) => {
         setTodoForm("");
     };
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <form
+            onSubmit={handleSubmit}
+            className="row d-flex justify-content-center mb-3"
+        >
+            <div className="col-8 me-2 p-0">
                 <input
                     type="text"
                     name="todoName"
                     value={todoForm}
                     onChange={(e) => setTodoForm(e.target.value)}
+                    className="form-control"
                 />
-                <input type="submit" value="Add" />
-            </form>
-        </div>
+            </div>
+            <input
+                type="submit"
+                value="Add"
+                className="btn btn-primary col-3"
+            />
+        </form>
     );
 };
 
