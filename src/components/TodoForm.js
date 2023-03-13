@@ -6,7 +6,6 @@ export const TodoForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const newTodo = { text: todoForm, isCompleted: false };
-        // TODO: call callback func from props
         props.addNewTodo(newTodo);
         setTodoForm("");
     };
