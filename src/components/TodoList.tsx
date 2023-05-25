@@ -3,29 +3,36 @@ import { useState, useEffect } from "react";
 import { OneTodo } from "./OneTodo";
 import { TodoForm } from "./TodoForm";
 
-export const TodoList = (props) => {
-    const storageTodoList = JSON.parse(localStorage.getItem("todoList"));
-    const [todoList, setTodoList] = useState(
+export type Todo = {
+    text: string;
+    isCompleted: boolean;
+};
+
+export const TodoList = () => {
+    const storageTodoList = JSON.parse(
+        localStorage.getItem("todoList") || "[]"
+    );
+    const [todoList, setTodoList] = useState<Todo[]>(
         storageTodoList === null ? [] : storageTodoList
     );
 
     useEffect(() => {
-        const storageTodoList = JSON.parse(localStorage.getItem("todoList"));
+        const storageTodoList = JSON.parse(
+            localStorage.getItem("todoList") || "[]"
+        );
 
-        if (storageTodoList) {
-            setTodoList(storageTodoList);
-        }
+        setTodoList(storageTodoList);
     }, []);
 
     useEffect(() => {
         localStorage.setItem("todoList", JSON.stringify(todoList));
     }, [todoList]);
 
-    const addNewTodo = (newTodo) => {
+    const addNewTodo = (newTodo: Todo) => {
         setTodoList([newTodo, ...todoList]);
     };
 
-    const handleComplete = (completedIndex) => {
+    const handleComplete = (completedIndex: number) => {
         const newTodo = todoList.map((todo, index) => {
             if (index === completedIndex) {
                 return {
@@ -38,11 +45,11 @@ export const TodoList = (props) => {
         setTodoList(newTodo);
     };
 
-    const handleDelete = (deleteIndex) => {
-        const newTodo = todoList.filter((todo, index) => {
+    const handleDelete = (deleteIndex: number) => {
+        const newTodos = todoList.filter((_, index) => {
             return deleteIndex !== index;
         });
-        setTodoList(newTodo);
+        setTodoList(newTodos);
     };
 
     return (
