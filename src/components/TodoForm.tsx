@@ -1,13 +1,19 @@
 import React from "react";
 import { useState } from "react";
+import { Todo } from "./TodoList";
 
-export const TodoForm = (props) => {
+type TodoFormProps = {
+    addNewTodo: (newTodo: Todo) => void;
+};
+
+export const TodoForm = (props: TodoFormProps) => {
+    const { addNewTodo } = props;
     const [todoForm, setTodoForm] = useState("");
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const newTodo = { text: todoForm, isCompleted: false };
-        props.addNewTodo(newTodo);
+        const newTodo = { text: todoForm, isCompleted: false } as Todo;
+        addNewTodo(newTodo);
         setTodoForm("");
     };
 
@@ -34,4 +40,4 @@ export const TodoForm = (props) => {
     );
 };
 
-export default TodoForm;
+export default TodoFormProps;
