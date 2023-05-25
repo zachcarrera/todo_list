@@ -1,10 +1,8 @@
 import React from "react";
+import { Todo } from "./TodoList";
 
 type OneTodoProp = {
-    todo: {
-        text: string;
-        isCompleted: boolean;
-    };
+    todo: Todo;
     index: number;
     handleComplete: (index: number) => void;
     handleDelete: (index: number) => void;
