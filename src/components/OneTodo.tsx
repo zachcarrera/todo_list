@@ -1,9 +1,21 @@
 import React from "react";
 
-export const OneTodo = (props) => {
+type OneTodoProp = {
+    todo: {
+        text: string;
+        isCompleted: boolean;
+    };
+    index: number;
+    handleComplete: (index: number) => void;
+    handleDelete: (index: number) => void;
+};
+
+export const OneTodo = (props: OneTodoProp) => {
     const {
         todo: { text, isCompleted },
         index,
+        handleComplete,
+        handleDelete,
     } = props;
 
     const styling = { textDecoration: isCompleted ? "line-through" : "none" };
@@ -17,7 +29,7 @@ export const OneTodo = (props) => {
                     name="completed"
                     id={`${text}-${index}`}
                     checked={isCompleted}
-                    onChange={(e) => props.handleComplete(index)}
+                    onChange={(e) => handleComplete(index)}
                 />
                 <label
                     style={styling}
@@ -27,7 +39,7 @@ export const OneTodo = (props) => {
                     {text}
                 </label>
                 <button
-                    onClick={(e) => props.handleDelete(index)}
+                    onClick={(e) => handleDelete(index)}
                     className="btn btn-outline-danger"
                 >
                     Delete
