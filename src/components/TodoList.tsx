@@ -1,7 +1,7 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import { OneTodo } from "./OneTodo";
 import { TodoForm } from "./TodoForm";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export type Todo = {
     text: string;
@@ -9,24 +9,7 @@ export type Todo = {
 };
 
 export const TodoList = () => {
-    const storageTodoList = JSON.parse(
-        localStorage.getItem("todoList") || "[]"
-    );
-    const [todoList, setTodoList] = useState<Todo[]>(
-        storageTodoList === null ? [] : storageTodoList
-    );
-
-    useEffect(() => {
-        const storageTodoList = JSON.parse(
-            localStorage.getItem("todoList") || "[]"
-        );
-
-        setTodoList(storageTodoList);
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem("todoList", JSON.stringify(todoList));
-    }, [todoList]);
+    const [todoList, setTodoList] = useLocalStorage<Todo[]>("todoList", []);
 
     const addNewTodo = (newTodo: Todo) => {
         setTodoList([newTodo, ...todoList]);
